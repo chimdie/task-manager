@@ -8,7 +8,7 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    fetchTodos();
+    // fetchTodos();
   }, []);
 
   const fetchTodos = async () => {

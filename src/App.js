@@ -22,6 +22,7 @@ function App() {
     );
     const resData = await res.json();
     setTodos(resData);
+    // console.log(resData);
   };
 
   const postTodo = async (text) => {
@@ -62,6 +63,13 @@ function App() {
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
+
+  const deleteTodo = (id) => {
+    const delTodo = fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    });
+    removeTodo(delTodo);
+  };
   return (
     <div className="App">
       <AddTodoForm postTodo={postTodo} />
@@ -71,7 +79,7 @@ function App() {
           index={index}
           todo={todo}
           completeTodo={completeTodo}
-          removeTodo={removeTodo}
+          deleteTodo={() => deleteTodo(todo.id)}
         />
       ))}
     </div>

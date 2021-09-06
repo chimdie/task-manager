@@ -48,7 +48,6 @@ function App() {
   const addTodo = (text) => {
     const newTodos = [text, ...todos];
     setTodos(newTodos);
-    console.log(todos);
   };
 
   const completeTodo = (index) => {
@@ -57,10 +56,20 @@ function App() {
     setTodos(newTodos);
   };
 
-  const removeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const removeTodo = (id) => {
+    // optimise this function for faster performance
+    const arr = todos.filter((val, i) => {
+      console.log("t :: ", id);
+      return val.id !== id;
+    });
+    setTodos(arr);
+  };
+
+  const deleteTodo = async (id) => {
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    });
+    removeTodo(id);
   };
   return (
     <div className="App">
@@ -68,10 +77,9 @@ function App() {
       {todos.map((todo, index) => (
         <Todo
           key={index}
-          index={index}
           todo={todo}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
+          completeTodo={() => completeTodo(index)}
+          deleteTodo={() => deleteTodo(todo.id)}
         />
       ))}
     </div>

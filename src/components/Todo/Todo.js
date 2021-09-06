@@ -1,16 +1,15 @@
 import "./Todo.css";
 
-const Todo = ({ todo, index, completeTodo, removeTodo }) => {
+const Todo = ({ todo, completeTodo, deleteTodo }) => {
   return (
     <div
-      key={index}
       className="todo"
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+      style={{ opacity: todo.isCompleted ? .5 : "" }}
     >
       {todo.title}
       <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>x</button>
+        <button onClick={completeTodo}>Complete</button>
+        <button onClick={deleteTodo}>x</button>
       </div>
     </div>
   );

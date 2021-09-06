@@ -8,7 +8,7 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    // fetchTodos();
+    fetchTodos();
   }, []);
 
   const fetchTodos = async () => {
@@ -22,7 +22,6 @@ function App() {
     );
     const resData = await res.json();
     setTodos(resData);
-    // console.log(resData);
   };
 
   const postTodo = async (text) => {
@@ -49,7 +48,6 @@ function App() {
   const addTodo = (text) => {
     const newTodos = [text, ...todos];
     setTodos(newTodos);
-    console.log(todos);
   };
 
   const completeTodo = (index) => {
@@ -58,17 +56,20 @@ function App() {
     setTodos(newTodos);
   };
 
-  const removeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const removeTodo = (id) => {
+    // optimise this function for faster performance
+    const arr = todos.filter((val, i) => {
+      console.log("t :: ", id);
+      return val.id !== id;
+    });
+    setTodos(arr);
   };
 
-  const deleteTodo = (id) => {
-    const delTodo = fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+  const deleteTodo = async (id) => {
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
       method: "DELETE",
     });
-    removeTodo(delTodo);
+    removeTodo(id);
   };
   return (
     <div className="App">
@@ -76,9 +77,8 @@ function App() {
       {todos.map((todo, index) => (
         <Todo
           key={index}
-          index={index}
           todo={todo}
-          completeTodo={completeTodo}
+          completeTodo={() => completeTodo(index)}
           deleteTodo={() => deleteTodo(todo.id)}
         />
       ))}

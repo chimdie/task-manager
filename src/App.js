@@ -9,6 +9,7 @@ function App() {
 
   useEffect(() => {
     fetchTodos();
+    updateTodo()
   }, []);
 
   const fetchTodos = async () => {
@@ -71,6 +72,27 @@ function App() {
     });
     removeTodo(id);
   };
+
+  const addNumber=(arr, n)=>{  
+    let arr1=[];
+    for(let i=0;i<Math.max(arr.length);i++){
+      arr1.push((arr[i]||0)+n)
+    }
+    return arr1;
+  } 
+
+  const updateTodo = async (id) => {
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        title: 'foo',
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    addNumber(id)
+  }
   return (
     <div className="App">
       <AddTodoForm postTodo={postTodo} />

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddForm/AddTodoForm";
 import Todo from "./components/Todo/Todo";
@@ -6,6 +5,7 @@ import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
     fetchTodos();
@@ -57,10 +57,9 @@ function App() {
   };
 
   const removeTodo = (id) => {
-    // optimise this function for faster performance
-    const arr = todos.filter((val, i) => {
-      console.log("t :: ", id);
-      return val.id !== id;
+    // optimise this function
+    const arr = todos.filter((todo) => {
+      return todo.id !== id;
     });
     setTodos(arr);
   };
@@ -71,6 +70,37 @@ function App() {
     });
     removeTodo(id);
   };
+
+  const findTodo = (id) => {
+    const _todo = todos.find((todo) => {
+      return todo.id === id;
+    });
+    return _todo;
+  };
+
+  const selectTodoToEdit = (todoId) => {
+    let _todo = findTodo(todoId);
+    _todo["contentEdit"] = true;
+    // console.log(_todo);
+    setCurrentTodo(_todo);
+  };
+  
+  // const updateTodo = async (id, text) => {
+  //   const res = await fetch(
+  //     `https://jsonplaceholder.typicode.com/posts/${id}`,
+  //     {
+  //       method: "PATCH",
+  //       body: JSON.stringify({
+  //         title: text,
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     }
+  //   );
+  //   const data = await res.json();
+  // };
+
   return (
     <div className="App">
       <AddTodoForm postTodo={postTodo} />
@@ -80,6 +110,12 @@ function App() {
           todo={todo}
           completeTodo={() => completeTodo(index)}
           deleteTodo={() => deleteTodo(todo.id)}
+          contenteditable={
+            currentTodo.id === todo.id && currentTodo.contentEdit === true
+              ? true
+              : false
+          }
+          updateTodo={() => selectTodoToEdit(todo.id)}
         />
       ))}
     </div>

@@ -6,10 +6,10 @@ import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
     fetchTodos();
-    updateTodo()
   }, []);
 
   const fetchTodos = async () => {
@@ -58,10 +58,9 @@ function App() {
   };
 
   const removeTodo = (id) => {
-    // optimise this function for faster performance
-    const arr = todos.filter((val, i) => {
-      console.log("t :: ", id);
-      return val.id !== id;
+    // optimise this function
+    const arr = todos.filter((todo) => {
+      return todo.id !== id;
     });
     setTodos(arr);
   };
@@ -73,26 +72,36 @@ function App() {
     removeTodo(id);
   };
 
-  const addNumber=(arr, n)=>{  
-    let arr1=[];
-    for(let i=0;i<Math.max(arr.length);i++){
-      arr1.push((arr[i]||0)+n)
-    }
-    return arr1;
-  } 
+  const findTodo = (id) => {
+    const _todo = todos.find((todo) => {
+      return todo.id === id;
+    });
+    return _todo;
+  };
 
-  const updateTodo = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        title: 'foo',
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-    addNumber(id)
-  }
+  const selectTodoToEdit = (todoId) => {
+    let _todo = findTodo(todoId);
+    _todo["contentEdit"] = true;
+    // console.log(_todo);
+    setCurrentTodo(_todo);
+  };
+  
+  const updateTodo = async (id, text) => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: text,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    const data = await res.json();
+  };
+
   return (
     <div className="App">
       <AddTodoForm postTodo={postTodo} />
@@ -102,6 +111,12 @@ function App() {
           todo={todo}
           completeTodo={() => completeTodo(index)}
           deleteTodo={() => deleteTodo(todo.id)}
+          contenteditable={
+            currentTodo.id === todo.id && currentTodo.contentEdit === true
+              ? true
+              : false
+          }
+          updateTodo={() => selectTodoToEdit(todo.id)}
         />
       ))}
     </div>

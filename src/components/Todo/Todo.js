@@ -5,7 +5,6 @@ const Todo = ({
   completeTodo,
   deleteTodo,
   updateTodo,
-  handleBtn,
   contenteditable,
 }) => {
   return (
@@ -21,7 +20,6 @@ const Todo = ({
         <button onClick={completeTodo}>Complete</button>
         <button onClick={deleteTodo}>delete</button>
         <button onClick={updateTodo}>edit</button>
-        {/* <button onClick={handleBtn}>edit</button> */}
       </div>
     </div>
   );

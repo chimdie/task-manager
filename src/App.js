@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddForm/AddTodoForm";
 import Todo from "./components/Todo/Todo";
@@ -86,21 +85,21 @@ function App() {
     setCurrentTodo(_todo);
   };
   
-  const updateTodo = async (id, text) => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({
-          title: text,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }
-    );
-    const data = await res.json();
-  };
+  // const updateTodo = async (id, text) => {
+  //   const res = await fetch(
+  //     `https://jsonplaceholder.typicode.com/posts/${id}`,
+  //     {
+  //       method: "PATCH",
+  //       body: JSON.stringify({
+  //         title: text,
+  //       }),
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //     }
+  //   );
+  //   const data = await res.json();
+  // };
 
   return (
     <div className="App">

@@ -56,13 +56,6 @@ function App() {
     setTodos(newTodos);
   };
 
-  const removeTodo = (id) => {
-    // optimise this function
-    const arr = todos.filter((todo) => {
-      return todo.id !== id;
-    });
-    setTodos(arr);
-  };
 
   const deleteTodo = async (id) => {
     await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
@@ -71,18 +64,25 @@ function App() {
     removeTodo(id);
   };
 
-  const findTodo = (id) => {
-    const _todo = todos.find((todo) => {
-      return todo.id === id;
+  const removeTodo = (id) => {
+    // optimise this function
+    const arr = todos.filter((todo) => {
+      return todo.id !== id;
     });
-    return _todo;
+    setTodos(arr);
   };
 
   const selectTodoToEdit = (todoId) => {
     let _todo = findTodo(todoId);
     _todo["contentEdit"] = true;
-    // console.log(_todo);
     setCurrentTodo(_todo);
+  };
+
+  const findTodo = (id) => {
+    const _todo = todos.find((todo) => {
+      return todo.id === id;
+    });
+    return _todo;
   };
   
   // const updateTodo = async (id, text) => {

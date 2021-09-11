@@ -25,14 +25,14 @@ function App() {
   };
 
   const postTodo = async (text) => {
-    const beta = todos.length + 1;
+    const uid = todos.length + 1;
 
     const _fetch = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId: beta,
-        id: beta,
+        userId: uid,
+        id: uid,
         title: text,
         completed: true,
       }),

@@ -1,6 +1,6 @@
 import path from "path";
 import express from "express";
-import initialRenderRoutes from "./routes/index";
+import initialRenderRoutes from "./routes/initialRenderController.js";
 
 const app = express();
 app.use("^/$", initialRenderRoutes);

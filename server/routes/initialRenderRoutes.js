@@ -1,6 +1,5 @@
 import express from 'express';
-// import initialRenderController from '../controller';
-import initialRenderController from '../controller/index'
+import initialRenderController from '../controller/initialRenderController.js'
 
 const router = express.Router();
 

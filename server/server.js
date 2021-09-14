@@ -1,10 +1,9 @@
 import path from "path";
 import express from "express";
-import initialRenderRoutes from "./routes/initialRenderController.js";
+import initialRenderRoutes from "./controller/initialRenderController";
 
 const app = express();
 app.use("^/$", initialRenderRoutes);
-
 app.use(express.static(path.resolve(__dirname, "../build")));
 
 const port = 5000;

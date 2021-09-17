@@ -8,7 +8,14 @@ function App() {
   const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
-    fetchTodos();
+    // fetchTodos();
+    const todo = localStorage.getItem("todos");
+    const savedItem = JSON.parse(todo)
+
+    if(savedItem) {
+      setTodos(savedItem)
+    }
+    
   }, []);
 
   const fetchTodos = async () => {
@@ -84,22 +91,6 @@ function App() {
     });
     return _todo;
   };
-  
-  // const updateTodo = async (id, text) => {
-  //   const res = await fetch(
-  //     `https://jsonplaceholder.typicode.com/posts/${id}`,
-  //     {
-  //       method: "PATCH",
-  //       body: JSON.stringify({
-  //         title: text,
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       },
-  //     }
-  //   );
-  //   const data = await res.json();
-  // };
 
   return (
     <div className="App">

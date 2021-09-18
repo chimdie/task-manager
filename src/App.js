@@ -9,13 +9,10 @@ function App() {
 
   useEffect(() => {
     // fetchTodos();
-    const todo = localStorage.getItem("todos");
-    const savedItem = JSON.parse(todo)
+    const todo = localStorage.setItem("todos", JSON.stringify(todos));
+    const savedItem = JSON.parse(localStorage.getItem(todo));
 
-    if(savedItem) {
-      setTodos(savedItem)
-    }
-    
+    if (savedItem) setTodos(savedItem);
   }, []);
 
   const fetchTodos = async () => {
@@ -62,7 +59,6 @@ function App() {
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
   };
-
 
   const deleteTodo = async (id) => {
     await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {

@@ -13,6 +13,17 @@ const AddTodoForm = ({ postTodo }) => {
     e.preventDefault();
     if (!value) return;
     postTodo(value);
+
+    const id = value.length + 1;
+    let newArray = localStorage.getItem("userTask") || [];
+
+    newArray.push({ id, value });
+
+    const userTask = localStorage.setItem("userTask", JSON.stringify(newArray));
+    // const retData = localStorage.getItem(userTask);
+    console.log("gh", userTask);
+
+    // if (savedItem) setValue(savedItem);
     setValue("");
   };
   return (

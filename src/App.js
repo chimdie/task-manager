@@ -9,10 +9,6 @@ function App() {
 
   useEffect(() => {
     // fetchTodos();
-    const todo = localStorage.setItem("todos", JSON.stringify(todos));
-    const savedItem = JSON.parse(localStorage.getItem(todo));
-
-    if (savedItem) setTodos(savedItem);
   }, []);
 
   const fetchTodos = async () => {

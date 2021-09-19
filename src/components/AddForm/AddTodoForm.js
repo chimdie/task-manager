@@ -15,13 +15,26 @@ const AddTodoForm = ({ postTodo }) => {
     postTodo(value);
 
     const id = value.length + 1;
-    let newArray = localStorage.getItem("userTask") || [];
+    let DBtodos = JSON.parse( localStorage.getItem("userTask"));
+    if (Array.isArray(DBtodos)) {
+      console.log({DBtodos})
+      DBtodos.push({ id, value });
+      const userTask = localStorage.setItem(
+        "userTask",
+        JSON.stringify(DBtodos)
+      );
+    } else {
+      let DBtodos = [];
+      DBtodos.push({ id, value });
 
-    newArray.push({ id, value });
+      const userTask = localStorage.setItem(
+        "userTask",
+        JSON.stringify(DBtodos)
+      );
+    }
+    //
 
-    const userTask = localStorage.setItem("userTask", JSON.stringify(newArray));
     // const retData = localStorage.getItem(userTask);
-    console.log("gh", userTask);
 
     // if (savedItem) setValue(savedItem);
     setValue("");

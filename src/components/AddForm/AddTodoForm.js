@@ -6,7 +6,7 @@ const AddTodoForm = ({ postTodo }) => {
 
   useEffect(() => {
     const userTask = localStorage.getItem("userTask");
-    // if (userTask) setValue(userTask);
+    if (userTask) setValue(JSON.parse(userTask));
   }, []);
 
   // useEffect(() => {
@@ -20,11 +20,13 @@ const AddTodoForm = ({ postTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!value) return;
     postTodo(value);
 
     const id = value.length + 1;
     let DBtodos = JSON.parse(localStorage.getItem("userTask"));
+
     if (Array.isArray(DBtodos)) {
       // console.log({ DBtodos });
       DBtodos.push({ id, value });

@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddTodo.css";
 
 const AddTodoForm = ({ postTodo }) => {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    const userTask = localStorage.getItem("userTask");
+    // if (userTask) setValue(userTask);
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("userTask", JSON.stringify(value));
+  // });
 
   const handleValue = (e) => {
     e.preventDefault();
@@ -15,9 +24,9 @@ const AddTodoForm = ({ postTodo }) => {
     postTodo(value);
 
     const id = value.length + 1;
-    let DBtodos = JSON.parse( localStorage.getItem("userTask"));
+    let DBtodos = JSON.parse(localStorage.getItem("userTask"));
     if (Array.isArray(DBtodos)) {
-      console.log({DBtodos})
+      // console.log({ DBtodos });
       DBtodos.push({ id, value });
       const userTask = localStorage.setItem(
         "userTask",
@@ -31,12 +40,8 @@ const AddTodoForm = ({ postTodo }) => {
         "userTask",
         JSON.stringify(DBtodos)
       );
+      // setValue(userTask)
     }
-    //
-
-    // const retData = localStorage.getItem(userTask);
-
-    // if (savedItem) setValue(savedItem);
     setValue("");
   };
   return (

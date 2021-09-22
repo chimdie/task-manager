@@ -8,20 +8,12 @@ function App() {
   const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
-    // fetchTodos();
+    fetchTodos();
   }, []);
 
   const fetchTodos = async () => {
-    const _fetch = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    const res = await fetch(
-      "https://jsonplaceholder.typicode.com/todos",
-      _fetch
-    );
-    const resData = await res.json();
-    setTodos(resData);
+    const userTask = localStorage.getItem("userTask");
+    if (userTask) setTodos(JSON.parse(userTask));
   };
 
   const postTodo = async (text) => {
@@ -57,10 +49,13 @@ function App() {
   };
 
   const deleteTodo = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    });
-    removeTodo(id);
+    // await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    //   method: "DELETE",
+    // });
+  
+      localStorage.removeItem("userTask");
+      removeTodo(id);
+    
   };
 
   const removeTodo = (id) => {

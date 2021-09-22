@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddForm/AddTodoForm";
 import Todo from "./components/Todo/Todo";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   };
 
   const postTodo = async (text) => {
-    const uid = todos.length + 1;
+    const uid = uuidv4();
 
     const _fetch = {
       method: "POST",

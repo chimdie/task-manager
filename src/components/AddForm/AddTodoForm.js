@@ -1,4 +1,5 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./AddTodo.css";
 
 const AddTodoForm = ({ postTodo }) => {
@@ -15,7 +16,7 @@ const AddTodoForm = ({ postTodo }) => {
     if (!value) return;
     postTodo(value);
 
-    const id = value.length + 1;
+    const id = uuidv4();
     let DBtodos = JSON.parse(localStorage.getItem("userTask"));
 
     if (Array.isArray(DBtodos)) {

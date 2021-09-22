@@ -49,21 +49,20 @@ function App() {
   };
 
   const deleteTodo = async (id) => {
-    // await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    //   method: "DELETE",
-    // });
-  
-      localStorage.removeItem("userTask");
-      removeTodo(id);
-    
+    removeTodo(id);
+    let todos = JSON.parse(localStorage.getItem("userTask"));
+
+    let newTodos = todos.filter((val, index) => {
+      return val.id !== id;
+    });
+    localStorage.setItem("userTask", JSON.stringify(newTodos));
   };
 
   const removeTodo = (id) => {
-    // optimise this function
-    const arr = todos.filter((todo) => {
+    const selectedTodo = todos.filter((todo) => {
       return todo.id !== id;
     });
-    setTodos(arr);
+    setTodos(selectedTodo);
   };
 
   const selectTodoToEdit = (todoId) => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddForm/AddTodoForm";
 import Todo from "./components/Todo/Todo";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
 function App() {
@@ -12,20 +13,12 @@ function App() {
   }, []);
 
   const fetchTodos = async () => {
-    const _fetch = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    const res = await fetch(
-      "https://jsonplaceholder.typicode.com/todos",
-      _fetch
-    );
-    const resData = await res.json();
-    setTodos(resData);
+    const userTask = localStorage.getItem("userTask");
+    if (userTask) setTodos(JSON.parse(userTask));
   };
 
   const postTodo = async (text) => {
-    const uid = todos.length + 1;
+    const uid = uuidv4();
 
     const _fetch = {
       method: "POST",
@@ -56,20 +49,21 @@ function App() {
     setTodos(newTodos);
   };
 
-
   const deleteTodo = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    });
     removeTodo(id);
+    let todos = JSON.parse(localStorage.getItem("userTask"));
+
+    let newTodos = todos.filter((val, index) => {
+      return val.id !== id;
+    });
+    localStorage.setItem("userTask", JSON.stringify(newTodos));
   };
 
   const removeTodo = (id) => {
-    // optimise this function
-    const arr = todos.filter((todo) => {
+    const selectedTodo = todos.filter((todo) => {
       return todo.id !== id;
     });
-    setTodos(arr);
+    setTodos(selectedTodo);
   };
 
   const selectTodoToEdit = (todoId) => {
@@ -84,22 +78,6 @@ function App() {
     });
     return _todo;
   };
-  
-  // const updateTodo = async (id, text) => {
-  //   const res = await fetch(
-  //     `https://jsonplaceholder.typicode.com/posts/${id}`,
-  //     {
-  //       method: "PATCH",
-  //       body: JSON.stringify({
-  //         title: text,
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       },
-  //     }
-  //   );
-  //   const data = await res.json();
-  // };
 
   return (
     <div className="App">

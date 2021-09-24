@@ -1,3 +1,41 @@
+td{
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: Raleway,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #222;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #E1E1E1;
+  padding-right: 0;
+}
+
+.delete, .complete, .edit{
+  margin: 0 .4rem;
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.delete:hover, .complete:hover, .edit:hover{
+  background: #a39e9e;
+}
+
 .todo {
   align-items: center;
   background: #fff;
@@ -5,11 +43,12 @@
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   display: flex;
   font-size: 12px;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   margin-bottom: 6px;
   padding: 10px 10px;
-}
-
-button{
-  margin: 0 .4rem;
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: Raleway,HelveticaNeue,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #222;
 }

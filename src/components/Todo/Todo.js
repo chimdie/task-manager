@@ -8,19 +8,23 @@ const Todo = ({
   contenteditable,
 }) => {
   return (
-    <div className="todo" style={{ opacity: todo.isCompleted ? 0.5 : "" }}>
-      <span
-        contentEditable={contenteditable}
-        suppressContentEditableWarning={true}
-      >
-        {" "}
-        {todo.title}
-      </span>
-      <div>
-        <button onClick={completeTodo}>Complete</button>
-        <button onClick={deleteTodo}>delete</button>
-        <button onClick={updateTodo}>edit</button>
-      </div>
+    <div
+      style={{ opacity: todo.isCompleted ? 0.5 : "" }}
+      contentEditable={contenteditable}
+      suppressContentEditableWarning={true}
+    >
+      <td>{todo.title}</td>
+      <td>
+        <button onClick={completeTodo} className="complete">
+          Complete
+        </button>
+        <button onClick={deleteTodo} className="delete">
+          delete
+        </button>
+        <button onClick={updateTodo} className="edit">
+          edit
+        </button>
+      </td>
     </div>
   );
 };

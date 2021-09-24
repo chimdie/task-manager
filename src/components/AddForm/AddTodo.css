@@ -6,6 +6,7 @@
     width: 400px;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid #bbb;
     outline: none;
 }
 .add-button{
@@ -13,10 +14,12 @@
     padding: 10px;
     font-size: 16px;
     margin: 10px;
-    border-radius: 10px;
-    outline: none;
+    border-radius: 8px;
+    border: none;
+    background-color: #33c3f0;
+    color: #fff;
 }
 .add-button:hover{
-    background-color: #ccc;
+    background-color: #12a1da;
     cursor: pointer;
 }

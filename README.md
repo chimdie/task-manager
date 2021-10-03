@@ -1,6 +1,6 @@
 # task manager
 
-This task manager helps you manage data with an api. You can get default data from the api, post your prefered data and delete data fetched from the api.
+You can get default data from the api, post your prefered data and delete data fetched from the api.
 
 ## Available Scripts
 

@@ -52,8 +52,7 @@ function App() {
   const deleteTodo = async (id) => {
     removeTodo(id);
     let todos = JSON.parse(localStorage.getItem("userTask"));
-
-    let newTodos = todos.filter((val, index) => {
+    let newTodos = todos.filter((val) => {
       return val.id !== id;
     });
     localStorage.setItem("userTask", JSON.stringify(newTodos));
@@ -63,6 +62,7 @@ function App() {
     const selectedTodo = todos.filter((todo) => {
       return todo.id !== id;
     });
+    console.log("removed id:", id);
     setTodos(selectedTodo);
   };
 

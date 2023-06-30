@@ -1,6 +1,6 @@
 # task manager
 
-You can get default data from the api, post your prefered data and delete data fetched from the api. Live site [here](https://www.pikepics.com/).
+You can get default data from the api, post your prefered data and delete data fetched from the api.
 
 ## Available Scripts
 
